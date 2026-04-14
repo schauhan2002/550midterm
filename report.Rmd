@@ -22,6 +22,14 @@ library(dplyr)
 library(ggplot2)
 library(gtsummary)
 
+library(readr) #to read in csv
+library(labelled) #to create nice labels
+library(DataExplorer) #to plot missing data
+library(ggplot2) #to use plot theme
+library(glue) #to use parameters in caption
+library(gtsummary) #to create table one
+library(rmarkdown)
+
 ```
 Cleaning data based on parameters (run this before loading cleandata.rds in your own code!!)
 
@@ -44,8 +52,20 @@ saveRDS(
 
 Section 1: Christina
 
-```{r, elements1}
+Missing data is displayed in the plot below, and patient characteristics are summarized in Table 1. Note that the variable tracking sickle cell disease is not included in the table because it was present in none of the patients, with no missing data. Furthermore, measurements labelled as taken at discharge were taken at death or withdrawal from the study if the patient was not discharged. 
 
+```{r missing-data, echo=FALSE, fig.height=8, fig.width=8}
+missing_data_plot <- readRDS(
+  file = here::here("output/missing_data_plot.rds")
+)
+missing_data_plot
+```
+
+```{r table-one, echo=FALSE}
+table_one <- readRDS(
+  file = here::here("output/table_one.rds")
+)
+table_one
 ```
 
 ## Days to Stabilization of Patients by Site
