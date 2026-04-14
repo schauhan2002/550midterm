@@ -19,6 +19,8 @@ Feel free to load any packages you use in this section!!
 ```{r, load-packages, include = FALSE}
 
 library(dplyr)
+library(ggplot2)
+library(gtsummary)
 
 ```
 Cleaning data based on parameters (run this before loading cleandata.rds in your own code!!)
