@@ -95,41 +95,15 @@ Section 3: Sakshi
 
 This section summarizes key clinical outcomes and complications during admission, focusing on shock, impaired consciousness, severe pneumonia, diarrhoea, malaria, tuberculosis, HIV status, and reasons for withdrawal from therapy. We present a table of withdrawal outcomes by treatment arm and a bar plot showing the distribution of withdrawal reasons across arms.
 
-```{r, elements3}
-library(gtsummary)
-library(ggplot2)
-
-cleandata <- readRDS(
-  file = "data/cleandata.rds"
+```{r, elements3, echo=FALSE}
+outcome_table <- readRDS(
+  file = here::here("output/outcome_table.rds")
+)
+withdraw_plot <- readRDS(
+  file = here::here("output/withdraw_plot.rds")
 )
 
-# Table of outcome frequencies and percentages by treatment group 
-outcome_table <- cleandata %>%
-  select(arm, withdraw2) %>%
-  tbl_cross(
-    row = arm,
-    col = withdraw2,
-    percent = "row"
-  ) %>%
-  bold_labels()
-
 outcome_table
-
-# Bar plot of withdrawal reasons by treatment arm
-
-withdraw_plot <- cleandata %>%
-  filter(!is.na(withdraw2)) %>%
-  ggplot(aes(x = withdraw2, fill = arm)) +
-  geom_bar(position = "dodge") +
-  labs(
-    x = "Reason for withdrawal",
-    y = "Number of patients",
-    fill = "Treatment arm",
-    title = "Reasons for withdrawal/discontinuation of therapy by treatment arm"
-  ) +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
 withdraw_plot
 ```
 
